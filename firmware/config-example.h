@@ -9,6 +9,14 @@
 //MQTT Section
 #define MQTT_SERVER "your.mqtt.server"
 
+//Initialization (Heating setpoint and mode after a controller reset)
+#define INIT_TEMPERATURE 18;
+#define INIT_STANDBY true;
+
+//Retries
+#define MAX_MQTT_RETRY_COUNT 20 //sets the maximum amount of MQTT retries before reboot
+#define MAX_WIFI_RETRY_COUNT 20 //sets the maximum amount of WiFi retries before reboot
+
 //Intervals
 #define CONTROLLER_INTERVAL     180000 //Interval between level changes
 #define MESSAGE_INTERVAL        60000 //Interval between MQTT Messages

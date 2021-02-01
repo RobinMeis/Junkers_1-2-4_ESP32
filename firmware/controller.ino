@@ -1,6 +1,6 @@
-float targetTemperature = 18;
+float targetTemperature = INIT_TEMPERATURE;
 float currentTemperature = targetTemperature;
-bool standby = true;
+bool standby = INIT_STANDBY;
 long nextSet = 0;
 
 void setTargetTemperature(float target) {
