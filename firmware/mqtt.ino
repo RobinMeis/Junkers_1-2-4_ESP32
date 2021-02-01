@@ -3,6 +3,7 @@
 
 PubSubClient client(espClient);
 long nextReconnect = 0;
+int mqttRetryCount = 0;
 
 bool mqttConnect() {
   client.setServer(
@@ -36,12 +37,22 @@ bool mqttReconnect() { //Returns true on success, otherwise false
   if (millis() > nextReconnect) {
     Serial.println("MQTT connection failed");
     Serial.print("Attempting MQTT connection...");
+    client.disconnect();
     if (client.connect("heater")) {
       Serial.println("connected");
+      mqttRetryCount = 0;
       subscribe();
       return true;
     } else {
       Serial.println("Reconnect failed.");
+      mqttRetryCount += 1;
+      Serial.print("MQTT retry count: ");
+      Serial.println(mqttRetryCount);
+      if (mqttRetryCount > MAX_MQTT_RETRY_COUNT) {
+        Serial.println("MQTT failed too often. Resetting...");
+        delay(1000);
+        ESP.restart();
+      }
       nextReconnect = millis() + MQTT_RETRY_INTERVAL;
       return false;
     }

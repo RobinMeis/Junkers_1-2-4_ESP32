@@ -6,6 +6,7 @@ WiFiClient espClient;
 
 long nextMsg = 0;
 long nextWifiRetry = 0;
+int wifiRetryCount = 0;
 
 void setup() {
   pinMode(LED_ERROR, OUTPUT); //Prepare LED_ERROR
@@ -58,9 +59,18 @@ bool wifiReconnect() { //Checks connection and reconnects if neccessary. Returns
 
       if (WiFi.status() == WL_CONNECTED) {
         Serial.println("Success");
+        wifiRetryCount = 0;
         return true;
       } else {
         Serial.println("Failed");
+        wifiRetryCount += 1;
+        Serial.print("WiFi retry count: ");
+        Serial.println(wifiRetryCount);
+        
+        if (wifiRetryCount > MAX_WIFI_RETRY_COUNT) {
+          Serial.println("WiFi failed too often. Reset...");
+          ESP.restart();
+        }
         nextWifiRetry = millis() + WIFI_RETRY_INTERVAL; //Next retry in 5 seconds
         return false;
       }
@@ -80,12 +90,13 @@ void loop() {
   }
 
   if (!mqttConnected()) {
-    if (mqttReconnect()) { //Enable error LED on MQTT failure
+    if (!mqttReconnect()) { //Enable error LED on MQTT failure
       digitalWrite(LED_ERROR, LOW);
     } else {
       digitalWrite(LED_ERROR, HIGH);
     }
   }
+
   mqttLoop();
 
   if (nextMsg < millis()) { //Send values every X seconds
