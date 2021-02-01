@@ -7,7 +7,7 @@ Der Schalplan ist von https://wiki.fhem.de/wiki/Junkers_Therme_Stetigregelung#Vo
 ![Schematic](schematic.jpg)
 
 ## Firmware
-Die Firmware befindet sich im Verzeichnis `firmware/`. Vor dem Flashen der Firmware muss die Datei `config.h` angelegt werden. In der Datei `config-example.h` befindet sich eine Vorlage, bei der die eigenen WLAN Zugangsdaten und der MQTT eingetragen werden müssen.
+Die Firmware befindet sich im Verzeichnis `firmware/`. Vor dem Flashen der Firmware muss die Datei `config.h` angelegt werden. In der Datei `config-example.h` befindet sich eine Vorlage, bei der die eigenen WLAN Zugangsdaten und der MQTT Server eingetragen werden müssen.
 
 ## MQTT
 Die folgenden MQTT werden verwendet.
