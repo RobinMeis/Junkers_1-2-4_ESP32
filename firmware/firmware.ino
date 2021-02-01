@@ -100,7 +100,6 @@ void loop() {
     Serial.println(pressure);
 
     if (getToSet()) {
-      Serial.println("controller_ran");
       setCurrentTemperature(temperature); //Inform controller about new temperature
       setVoltage(getPower()); //Set output
       setNextSet(CONTROLLER_INTERVAL);
