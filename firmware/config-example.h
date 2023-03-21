@@ -8,7 +8,7 @@
 
 //MQTT Section
 #define MQTT_SERVER "your.mqtt.server"
-#define MQTT_PORT "1883"
+#define MQTT_PORT 1883
 #define MQTT_USER "your.mqtt.username"
 #define MQTT_PASSWORD "your.mqtt.password"
 
