@@ -8,12 +8,12 @@ int mqttRetryCount = 0;
 bool mqttConnect() {
   client.setServer(
     MQTT_SERVER, //Server
-    1883 //Port
+    MQTT_PORT //Port
   );
   client.connect(
     "heater",
-    NULL, //Username
-    NULL, //Password
+    MQTT_USER, //Username
+    MQTT_PASSWORD, //Username
     "heater/status", //Will Topic
     2, //Will QoS
     1, //Will retain
