@@ -1,5 +1,6 @@
 #include <PubSubClient.h>
 #include <stdlib.h>
+#include "config.h"
 
 PubSubClient client(espClient);
 long nextReconnect = 0;
